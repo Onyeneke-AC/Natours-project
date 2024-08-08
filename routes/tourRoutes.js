@@ -1,5 +1,6 @@
 const express = require('express');
 const tourController = require('./../controllers/tourController');
+const authController = require('../controllers/authController');
 
 const {
   getAllTours,
@@ -11,6 +12,8 @@ const {
   getTourStats,
   getMonthlyPlan,
 } = tourController;
+
+const { protect } = authController;
 
 const router = express.Router();
 
@@ -27,7 +30,7 @@ router.route('/top-5-cheap').get(aliasTopTours, getAllTours);
 // if it does, it'll run the checkId function
 // router.param('id', checkId);
 
-router.route('/').get(getAllTours).post(createTour);
+router.route('/').get(protect, getAllTours).post(createTour);
 
 router.route('/:id').get(getTour).patch(updateTour).delete(deleteTour);
 
