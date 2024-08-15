@@ -33,10 +33,18 @@ const reviewSchema = new mongoose.Schema(
 );
 
 reviewSchema.pre(/^find/, function (next) {
+  // commented out to prevent a nested loop of fields which could result in performance drop
+
+  //   this.populate({
+  //     path: 'tour',
+  //     select: 'name',
+  //   }).populate({
+  //     path: 'user',
+  //     select: 'name photo',
+  //   });
+
+  // hence we just populated the user alone
   this.populate({
-    path: 'tour',
-    select: 'name',
-  }).populate({
     path: 'user',
     select: 'name photo',
   });
