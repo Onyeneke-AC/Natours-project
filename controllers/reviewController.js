@@ -18,6 +18,8 @@ exports.getAllReviews = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.getReview = factory.getOne(Review);
+
 exports.setTourUserIds = (req, res, next) => {
   // allow nested routes
   if (!req.body.tour) req.body.tour = req.params.tourId;
