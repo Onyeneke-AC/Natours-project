@@ -13,6 +13,8 @@ const {
   aliasTopTours,
   getTourStats,
   getMonthlyPlan,
+  getToursWithin,
+  getDistances,
 } = tourController;
 
 const { protect, restrictTo } = authController;
@@ -33,6 +35,14 @@ router.route('/tour-stats').get(getTourStats);
 
 // route to get the top 5 cheap tours
 router.route('/top-5-cheap').get(aliasTopTours, getAllTours);
+
+router
+  .route('/tours-within/:distance/center/:latlng/unit/:unit')
+  .get(getToursWithin);
+// tours-within?distance=233&center=-40,45&unit=mi
+// tours-within/233/center/-40,45/unit/mi
+
+router.route('/distances/:latlng/unit/:unit').get(getDistances);
 
 // used to check if the route has an id
 // if it does, it'll run the checkId function
