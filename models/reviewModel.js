@@ -33,6 +33,8 @@ const reviewSchema = new mongoose.Schema(
   },
 );
 
+reviewSchema.index({ tour: 1, user: 1 }, { unique: true });
+
 reviewSchema.pre(/^find/, function (next) {
   // commented out to prevent a nested loop of fields which could result in performance drop
 
@@ -53,7 +55,7 @@ reviewSchema.pre(/^find/, function (next) {
   next();
 });
 
-reviewSchema.static.calcAverageRatings = async function (tourId) {
+reviewSchema.statics.calcAverageRatings = async function (tourId) {
   const stats = await this.aggregate([
     {
       $match: { tour: tourId },
