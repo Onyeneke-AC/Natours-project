@@ -3,6 +3,11 @@ extends base
 include _reviewCard
 
 block append head 
+    script(src='https://api.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.js')
+    link(href='https://api.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.css' rel='stylesheet')
+    //- script(src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js')
+    //- link(href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet')
+
     //- script(src='/js/mapbox.js')
 
 
@@ -75,7 +80,7 @@ block content
                 img.picture-box__img(src=`/img/tours/${img}`, class=`picture-box__img--${i + 1}` alt=`${tour.name} Tour ${i + 1}`)
 
     section.section-map
-        #map(data-location=`${JSON.stringify(tour.locations)}`)
+        #map(data-locations=`${JSON.stringify(tour.locations)}`)
 
     section.section-reviews
         .reviews
